@@ -1,0 +1,25 @@
+[build-system]
+# Minimum requirements for the build system to execute.
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dhkdao-airdrop-scripts"
+version = "0.0.1"
+authors = [
+  { name = "Jimmy Chu", email = "jimmychu0807@gmail.com" }
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">= 3.10"
+keywords = ["DHK", "DHK dao", "airdrop"]
+dependencies = [
+  "jupyter",
+  "pandas",
+  "pip-tools",
+  "python-dotenv"
+]
+
+[project.urls]
+Homepage = "https://github.com/dhkdao/airdrop-scripts"
+Issues = "https://github.com/dhkdao/airdrop-scripts/issues"
