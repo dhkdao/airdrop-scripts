@@ -9,6 +9,5 @@ A [Python script](./notebooks/airdrop.ipynb) to retrieve historical token prices
 Token price:
 - <https://www.cryptocompare.com/>
 
-Inflation rate:
-- <https://www.stakingrewards.com/>
-- <https://www.mintscan.io/>
+Staking APR:
+- <https://www.mintscan.io/> (operated by [Cosmostation](https://cosmostation.io/))
