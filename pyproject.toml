@@ -1,25 +1,42 @@
 [build-system]
-# Minimum requirements for the build system to execute.
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [project]
-name = "dhkdao-airdrop-scripts"
-version = "0.0.1"
+name = "airdrop-scripts"
+version = "0.1.0"
 authors = [
-  { name = "Jimmy Chu", email = "jimmychu0807@gmail.com" }
+    { name = "Jimmy Chu", email = "jimmychu0807@gmail.com" },
 ]
+description = "DHK dao airdrop scripts"
 license = { file = "LICENSE" }
 readme = "README.md"
-requires-python = ">= 3.10"
+requires-python = ">=3.10"
 keywords = ["DHK", "DHK dao", "airdrop"]
 dependencies = [
-  "jupyter",
-  "pandas",
-  "pip-tools",
-  "python-dotenv"
+    "pandas>=2.2.3",
+    "python-dotenv",
+    "numpy>=2.1.0"
+]
+
+[tool.pdm.dev-dependencies]
+lint = [
+  "flake8",
+  "black"
+]
+test = [
+  "pytest>=8.3.3",
 ]
 
 [project.urls]
 Homepage = "https://github.com/dhkdao/airdrop-scripts"
 Issues = "https://github.com/dhkdao/airdrop-scripts/issues"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.scripts]
+test = "pytest tests"
+lint = "flake8 src tests"
+"lint:write" = "black src tests"
+all = { composite = ["lint", "test"]}
