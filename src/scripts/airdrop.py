@@ -1,12 +1,14 @@
-from datetime import datetime, timezone
-from requests import Request, Session
-from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+# from datetime import datetime, timezone
+# from requests import Request, Session
+# from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
-import math
-import pandas as pd
+
+# import math
+# import pandas as pd
 from rich import print
 import typer
-import random
+
+# import random
 
 
 def airdrop_monthly_alloc(config_file, output, type):

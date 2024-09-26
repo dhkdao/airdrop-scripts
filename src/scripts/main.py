@@ -1,7 +1,6 @@
 import typer
 from typing_extensions import Annotated
 from enum import Enum
-from rich import print
 
 from airdrop import airdrop_monthly_alloc
 
