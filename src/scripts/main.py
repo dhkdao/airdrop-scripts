@@ -1,8 +1,9 @@
 import typer
 from typing_extensions import Annotated
 from enum import Enum
+from rich import print
 
-from airdrop import airdrop_monthly_alloc
+from airdrop import Airdrop
 
 
 class OutputType(str, Enum):
@@ -32,7 +33,9 @@ def monthly_alloc(
     """
     Compute the DHK dao monthly airdrop allocation based on staked value on various blockchains.
     """
-    airdrop_monthly_alloc(config, output, type)
+    airdrop = Airdrop(config)
+    result = airdrop.monthly_alloc()
+    print(result)
 
 
 if __name__ == "__main__":
