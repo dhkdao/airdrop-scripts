@@ -16,7 +16,9 @@ keywords = ["DHK", "DHK dao", "airdrop"]
 dependencies = [
     "pandas>=2.2.3",
     "python-dotenv",
-    "numpy>=2.1.0"
+    "numpy>=2.1.0",
+    "typer>=0.12.5",
+    "requests>=2.32.3",
 ]
 
 [tool.pdm.dev-dependencies]
@@ -39,4 +41,5 @@ distribution = true
 test = "pytest tests"
 lint = "flake8 src tests"
 "lint:write" = "black src tests"
+exe = "pdm run src/scripts/main.py"
 all = { composite = ["lint", "test"]}
