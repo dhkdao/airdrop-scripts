@@ -3,7 +3,7 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-name = "airdrop-scripts"
+name = "dhkdao_airdrop_scripts"
 version = "0.1.0"
 authors = [
     { name = "Jimmy Chu", email = "jimmychu0807@gmail.com" },
@@ -28,6 +28,7 @@ lint = [
 ]
 test = [
   "pytest>=8.3.3",
+  "python-dotenv>=1.0.1"
 ]
 
 [project.urls]
@@ -38,8 +39,9 @@ Issues = "https://github.com/dhkdao/airdrop-scripts/issues"
 distribution = true
 
 [tool.pdm.scripts]
-test = "pytest tests"
+test = "pytest --capture=no tests"
+"test:ci" = "pytest"
 lint = "flake8 src tests"
 "lint:write" = "black src tests"
 exe = "pdm run src/scripts/main.py"
-all = { composite = ["lint", "test"]}
+all = { composite = ["lint", "test:ci"]}

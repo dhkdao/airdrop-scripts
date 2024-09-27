@@ -8,6 +8,8 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from rich import print
 from typing import Optional
 
+from scripts.utils import is_number
+
 
 class Airdrop:
     @classmethod
@@ -24,8 +26,7 @@ class Airdrop:
 
         return True
 
-    def __init__(self, config_file):
-        config = json.loads(config_file.read())
+    def __init__(self, config):
         if Airdrop.check_config(config):
             self.config = config
 
@@ -127,17 +128,22 @@ class Airdrop:
             token, staking_amt = t["token"], t["qty"]
             token_price = t["price"] if "price" in t else self.fetch_price(token)
 
-            staking_val = token_price * staking_amt
-            staking_apr = 0
-            if "staking_apr" in t:
-                staking_apr = t["staking_apr"]
+            staking_val = (
+                token_price * staking_amt
+                if is_number(token_price) and is_number(staking_amt)
+                else None
+            )
+
+            staking_apr = None
+            if "staking-apr" in t:
+                staking_apr = t["staking-apr"]
             elif "network" in t:
                 staking_apr = self.fetch_staking_apr(t["network"])
 
             # NX> handles TypeError: unsupported operand type(s) for *: 'NoneType' and 'float'
             reward = (
                 staking_apr * staking_val
-                if isinstance(staking_apr, float) and isinstance(staking_val, float)
+                if is_number(staking_apr) and is_number(staking_val)
                 else None
             )
 
@@ -167,9 +173,13 @@ class Airdrop:
 
         # Calculate DHK distribution and distribution percent
         for idx, row in df.iterrows():
-            df.at[idx, "dhk-distribution-pc"] = (row["reward"] / ttl_reward) * 100
+            df.at[idx, "dhk-distribution-pc"] = (
+                (row["reward"] / ttl_reward) * 100 if is_number(row["reward"]) else None
+            )
             df.at[idx, "dhk-distribution"] = (
-                row["reward"] / ttl_reward * self.config["dhk_distribution"]
+                (row["reward"] / ttl_reward) * self.config["dhk_distribution"]
+                if is_number(row["reward"])
+                else None
             )
 
         return df
