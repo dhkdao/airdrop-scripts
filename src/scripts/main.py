@@ -3,6 +3,7 @@ from typing_extensions import Annotated
 from enum import Enum
 from rich import print
 
+import utils
 from airdrop import Airdrop
 
 
@@ -34,8 +35,23 @@ def monthly_alloc(
     Compute the DHK dao monthly airdrop allocation based on staked value on various blockchains.
     """
     airdrop = Airdrop(config)
-    result = airdrop.monthly_alloc()
-    print(result)
+    result = utils.round_output(airdrop.monthly_alloc())
+    result_output = None
+
+    # Transform the result suitable for output
+    match type:
+        case OutputType.json:
+            pass
+        case OutputType.csv:
+            pass
+        case OutputType.table:
+            result_output = result
+        case _:  # Unexpected output type
+            raise Exception("Unexpected output type.")
+
+    # Write the output either to screen or a file
+    fh = open(output, "w") if (output is not None) else None
+    print(result_output, file=fh)
 
 
 if __name__ == "__main__":
