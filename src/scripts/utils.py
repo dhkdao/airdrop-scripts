@@ -13,3 +13,7 @@ def round_output(df):
     for label, col_data in df.items():
         df[label] = col_data.apply(round_number)
     return df
+
+
+def is_number(i):
+    return isinstance(i, (int, float))
