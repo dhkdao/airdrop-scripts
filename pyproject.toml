@@ -3,7 +3,7 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-name = "dhkdao_airdrop_scripts"
+name = "dhkdao-airdrop"
 version = "0.1.0"
 authors = [
     { name = "Jimmy Chu", email = "jimmychu0807@gmail.com" },

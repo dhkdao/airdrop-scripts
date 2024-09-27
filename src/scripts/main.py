@@ -31,7 +31,7 @@ def monthly_alloc(
     ] = OutputType.table,
 ):
     """
-    Compute the DHK dao monthly airdrop allocation based on staked value on various blockchains.
+    Compute the DHKdao monthly airdrop allocation based on staked value on various blockchains.
     """
     config = get_config_with_apikey_envs(config)
     airdrop = Airdrop(config)
