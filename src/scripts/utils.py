@@ -1,3 +1,8 @@
+import io
+import json
+import os
+
+
 def round_number(val):
     if isinstance(val, float):
         if val < 1:  # keep 4 decimals
@@ -17,3 +22,16 @@ def round_output(df):
 
 def is_number(i):
     return isinstance(i, (int, float))
+
+
+def get_config_with_apikey_envs(config):
+    if isinstance(config, io.TextIOWrapper):
+        config = json.loads(config.read())
+
+    if os.getenv("CRYPTOCOMPARE_APIKEY") is not None:
+        config["apis"]["cryptocompare"]["apikey"] = os.getenv("CRYPTOCOMPARE_APIKEY")
+
+    if os.getenv("MINTSCAN_APIKEY") is not None:
+        config["apis"]["mintscan"]["apikey"] = os.getenv("MINTSCAN_APIKEY")
+
+    return config

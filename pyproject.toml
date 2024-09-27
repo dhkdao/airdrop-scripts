@@ -39,9 +39,9 @@ Issues = "https://github.com/dhkdao/airdrop-scripts/issues"
 distribution = true
 
 [tool.pdm.scripts]
-test = "pytest --capture=no tests"
-"test:ci" = "pytest"
+test = "pytest"
+"test:no-capture" = "pytest --capture=no tests"
 lint = "flake8 src tests"
 "lint:write" = "black src tests"
 exe = "pdm run src/scripts/main.py"
-all = { composite = ["lint", "test:ci"]}
+all = { composite = ["lint", "test"]}

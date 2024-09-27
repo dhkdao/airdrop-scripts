@@ -3,16 +3,19 @@ import os
 import pytest
 import typer
 from dotenv import load_dotenv
-from scripts import Airdrop
+from scripts import Airdrop, get_config_with_apikey_envs
 
 
 load_dotenv()
 
-UNKNOWN_TOKEN = "HASH"
-KNOWN_TOKEN = "ATOM"
 INVALID_CONFIG_FILEPATH = os.path.join(
     os.path.dirname(__file__), "../fixtures/config-invalid-1.json"
 )
+KNOWN_TOKEN = "ATOM"
+UNKNOWN_TOKEN = "HASH"
+KNOWN_NETWORK = "akash"
+UNKNOWN_NETWORK = "hash"
+
 
 print("INVALID_CONFIG_FILEPATH", INVALID_CONFIG_FILEPATH)
 
@@ -38,25 +41,7 @@ def get_config():
     )
 
 
-def get_config_with_cryptocompare_apikey_env():
-    config = get_config()
-    config["apis"]["cryptocompare"]["apikey"] = os.getenv("CRYPTOCOMPARE_APIKEY")
-    return config
-
-
 class TestAirdropClass:
-    def test_fetch_price_on_unknown_token_should_return_none(self):
-        config = get_config_with_cryptocompare_apikey_env()
-        airdrop = Airdrop(config)
-        price = airdrop.fetch_price(UNKNOWN_TOKEN)
-        assert price is None
-
-    def test_fetch_price_on_known_token_should_return_value(self):
-        config = get_config_with_cryptocompare_apikey_env()
-        airdrop = Airdrop(config)
-        price = airdrop.fetch_price(KNOWN_TOKEN)
-        assert isinstance(price, float)
-
     def test_on_config_missing_key_should_raise_exception(self):
         with open(INVALID_CONFIG_FILEPATH, "r") as f:
             config = json.loads(f.read())
@@ -66,5 +51,26 @@ class TestAirdropClass:
 
         assert excinfo.type is typer.Exit
 
-    def test_fetch_staking_apr(self):
-        pass
+    def test_fetch_price_on_known_token_should_work(self):
+        config = get_config_with_apikey_envs(get_config())
+        airdrop = Airdrop(config)
+        price = airdrop.fetch_price(KNOWN_TOKEN)
+        assert isinstance(price, float)
+
+    def test_fetch_price_on_unknown_token_should_return_none(self):
+        config = get_config_with_apikey_envs(get_config())
+        airdrop = Airdrop(config)
+        price = airdrop.fetch_price(UNKNOWN_TOKEN)
+        assert price is None
+
+    def test_fetch_staking_apr_on_known_network_should_work(self):
+        config = get_config_with_apikey_envs(get_config())
+        airdrop = Airdrop(config)
+        staking_apr = airdrop.fetch_staking_apr(KNOWN_NETWORK)
+        assert isinstance(staking_apr, float)
+
+    def test_fetch_staking_apr_on_unknown_network_should_return_none(self):
+        config = get_config_with_apikey_envs(get_config())
+        airdrop = Airdrop(config)
+        staking_apr = airdrop.fetch_staking_apr(UNKNOWN_NETWORK)
+        assert staking_apr is None
