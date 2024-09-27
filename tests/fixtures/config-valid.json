@@ -8,11 +8,11 @@
     "apis": {
         "cryptocompare": {
             "endpoint": "https://min-api.cryptocompare.com/data/pricehistorical",
-            "key": "cryptocompare-123456"
+            "apikey": "cryptocompare-123456"
         },
         "mintscan": {
             "endpoint": "https://apis.mintscan.io/v1/:network/apr",
-            "key": "mintscan-123456"
+            "apikey": "mintscan-123456"
         }
     }
 }
