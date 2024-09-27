@@ -41,9 +41,9 @@ def monthly_alloc(
     # Transform the result suitable for output
     match type:
         case OutputType.json:
-            pass
+            result_output = result.to_json(orient="records")
         case OutputType.csv:
-            pass
+            result_output = result.to_csv()
         case OutputType.table:
             result_output = result
         case _:  # Unexpected output type
