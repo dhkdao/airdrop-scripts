@@ -19,10 +19,10 @@ pip install dhkdao-airdrop
 dhkdao-airdrop --help
 
 # Run script with api keys set in config.json
-dhkdao_airdrop config.json -o output -t type
+dhkdao-airdrop config.json -o output -t type
 
 # Run script with api keys set in env vars
-CRYPTOCOMPARE_APIKEY="cc-apikey" MINTSCAN_APIKEY="ms-apikey" dhkdao_airdrop config.json -o output -t type
+CRYPTOCOMPARE_APIKEY="cc-apikey" MINTSCAN_APIKEY="ms-apikey" dhkdao-airdrop config.json -o output -t type
 ```
 
 Options:

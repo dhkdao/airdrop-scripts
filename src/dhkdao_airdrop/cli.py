@@ -3,7 +3,8 @@ from typing_extensions import Annotated
 from enum import Enum
 from rich import print
 
-from scripts import Airdrop, round_output, get_config_with_apikey_envs
+from .airdrop import Airdrop
+from .utils import round_output, get_config_with_apikey_envs
 
 
 class OutputType(str, Enum):
@@ -31,7 +32,7 @@ def monthly_alloc(
     ] = OutputType.table,
 ):
     """
-    Compute the DHKdao monthly airdrop allocation based on staked value on various blockchains.
+    Compute the DHK dao monthly airdrop allocation based on staked value on various blockchains.
     """
     config = get_config_with_apikey_envs(config)
     airdrop = Airdrop(config)
@@ -54,5 +55,5 @@ def monthly_alloc(
     print(result_output, file=fh)
 
 
-if __name__ == "__main__":
+def cli():
     app()
