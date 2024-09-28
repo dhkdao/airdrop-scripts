@@ -1,10 +1,9 @@
-import json
 import typer
 from typing_extensions import Annotated
 from enum import Enum
 from rich import print
 
-from scripts import round_output, Airdrop
+from scripts import Airdrop, round_output, get_config_with_apikey_envs
 
 
 class OutputType(str, Enum):
@@ -32,9 +31,10 @@ def monthly_alloc(
     ] = OutputType.table,
 ):
     """
-    Compute the DHK dao monthly airdrop allocation based on staked value on various blockchains.
+    Compute the DHKdao monthly airdrop allocation based on staked value on various blockchains.
     """
-    airdrop = Airdrop(json.loads(config.read()))
+    config = get_config_with_apikey_envs(config)
+    airdrop = Airdrop(config)
     result = round_output(airdrop.monthly_alloc())
     result_output = None
 

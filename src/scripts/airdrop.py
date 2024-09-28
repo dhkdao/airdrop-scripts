@@ -174,11 +174,13 @@ class Airdrop:
         # Calculate DHK distribution and distribution percent
         for idx, row in df.iterrows():
             df.at[idx, "dhk-distribution-pc"] = (
-                (row["reward"] / ttl_reward) * 100 if is_number(row["reward"]) else None
+                (row["reward"] / ttl_reward) * 100
+                if is_number(row["reward"]) and ttl_reward > 0
+                else None
             )
             df.at[idx, "dhk-distribution"] = (
                 (row["reward"] / ttl_reward) * self.config["dhk_distribution"]
-                if is_number(row["reward"])
+                if is_number(row["reward"]) and ttl_reward > 0
                 else None
             )
 

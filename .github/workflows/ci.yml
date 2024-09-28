@@ -25,4 +25,4 @@ jobs:
           pdm sync -d
       - name: Run Tests
         run: |
-          CRYPTOCOMPARE_APIKEY=${{secrets.CRYPTOCOMPARE_APIKEY}} pdm run all
+          CRYPTOCOMPARE_APIKEY=${{secrets.CRYPTOCOMPARE_APIKEY}} MINTSCAN_APIKEY=${{secrets.MINTSCAN_APIKEY}} pdm run all

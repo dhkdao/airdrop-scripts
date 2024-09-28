@@ -1,0 +1,23 @@
+{
+    "dhk_distribution": 100000,
+    "reference_date": "2024-09-21",
+    "tokens": [
+        { "token": "AKT",   "network": "akash", "qty": 188787 },
+        { "token": "ATOM",  "network": "cosmos", "qty": 592015 },
+        { "token": "JUNO",  "network": "juno-1", "qty": 84703 },
+        { "token": "HASH",  "network": "hash", "qty": 25020226 },
+        { "token": "OSMO",  "network": "osmosis-1", "qty": 862867 },
+        { "token": "STARS", "price": 0.00817, "staking-apr": 0.1363, "qty": 779458 },
+        { "token": "DSM",   "network": "DSM", "qty": 4010125 }
+    ],
+    "apis": {
+        "cryptocompare": {
+            "endpoint": "https://min-api.cryptocompare.com/data/pricehistorical",
+            "apikey": "cryptocompare-123456"
+        },
+        "mintscan": {
+            "endpoint": "https://apis.mintscan.io/v1/:network/apr",
+            "apikey": "mintscan-123456"
+        }
+    }
+}
