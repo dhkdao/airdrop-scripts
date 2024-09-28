@@ -3,7 +3,7 @@ from typing_extensions import Annotated
 from enum import Enum
 from rich import print
 
-from scripts import Airdrop, round_output, get_config_with_apikey_envs
+from dhkdao_airdrop import Airdrop, round_output, get_config_with_apikey_envs
 
 
 class OutputType(str, Enum):

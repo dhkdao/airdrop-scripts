@@ -43,5 +43,5 @@ test = "pytest"
 "test:no-capture" = "pytest --capture=no tests"
 lint = "flake8 src tests"
 "lint:write" = "black src tests"
-exe = "pdm run src/scripts/main.py"
+exe = "pdm run src/main.py"
 all = { composite = ["lint", "test"]}

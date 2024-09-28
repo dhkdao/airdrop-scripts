@@ -3,7 +3,7 @@ import os
 import pytest
 import typer
 from dotenv import load_dotenv
-from scripts import Airdrop, get_config_with_apikey_envs
+from dhkdao_airdrop import Airdrop, get_config_with_apikey_envs
 
 
 load_dotenv()

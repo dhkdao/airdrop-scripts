@@ -8,7 +8,7 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from rich import print
 from typing import Optional
 
-from scripts.utils import is_number
+from .utils import is_number
 
 
 class Airdrop:
